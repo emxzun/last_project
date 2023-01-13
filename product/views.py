@@ -1,3 +1,4 @@
+from django.views.generic import ListView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
@@ -24,6 +25,12 @@ class ProductAPIView(ModelViewSet):
 
 @api_view(['GET'])
 def get_hello(request):
-    logger.error(request.user)
+    logger.info(request.user)
     # print(request.hello)
     return Response('Hello')
+
+
+class ProductTemplateList(ListView):
+    model = Product
+    template_name = 'product_list.html'
+    context_object_name = 'products'
